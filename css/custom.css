@@ -3,6 +3,10 @@ body {
     background: -webkit-linear-gradient(to right, #185a9d, #43cea2);
     background: linear-gradient(to right, #185a9d, #43cea2); 
 }
+.container {
+  width: 90%;
+  max-width: 720px;
+}
 #contenido {
     background-color: white;
     margin-top: 40px;
@@ -23,7 +27,7 @@ header {
     font-weight: 100;
 }
 form {
-    margin: 30px 0;
+    margin: 30px 0px;
 }
 #loaders {
     text-align: center;
