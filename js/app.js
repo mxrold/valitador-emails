@@ -1,3 +1,6 @@
+// Variable global
+const REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 // Variables
 const btnEnviar = document.querySelector('#enviar');
 const formulario = document.querySelector('#enviar-mail');
@@ -43,10 +46,7 @@ function validarFormulario(e) {
     }
 
     if(e.target.type === 'email') {
-        const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-        
-        if(regex.test(e.target.value)) {
+        if(REGEX.test(e.target.value)) {
             const error = document.querySelector('p.error');
             if(error) {
                 error.remove()
@@ -61,7 +61,10 @@ function validarFormulario(e) {
         }
     }
 
-    
+    if(REGEX.test(email.value) !== '' && asunto.value !== '' && mensaje.value !== '') {
+        btnEnviar.disabled = false;
+        btnEnviar.classList.remove('cursor-not-allowed', 'opacity-50');
+    }
 }
 
 function mostrarError(mensaje) {
