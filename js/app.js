@@ -3,8 +3,8 @@ const REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\
 
 // Variables
 const btnEnviar = document.querySelector('#enviar');
+const btnReset = document.querySelector('#resetBtn');
 const formulario = document.querySelector('#enviar-mail');
-
 
 // Variables inputs
 const email = document.querySelector('#email');
@@ -16,9 +16,16 @@ eventListeners();
 function eventListeners() {
     document.addEventListener('DOMContentLoaded', iniciarApp);
 
+    // Campos del formulario
     email.addEventListener('blur', validarFormulario);
     asunto.addEventListener('blur', validarFormulario);
     mensaje.addEventListener('blur', validarFormulario);
+
+    // Enviar email
+    formulario.addEventListener('submit', enviarEmail);
+
+    // Reinicia formulario
+    btnReset.addEventListener('click', resetearFormulario);
 }
 
 
@@ -78,4 +85,32 @@ function mostrarError(mensaje) {
         // insertBefore() = Insertar al inicio
         formulario.appendChild(mensajeError);
     }
+}
+
+function enviarEmail(e) {
+    e.preventDefault();
+
+    // Mostrar spinner
+    const spinner = document.querySelector('#spinner');
+    spinner.style.display = 'flex';
+    setTimeout(() => {
+        spinner.style.display = 'none';
+
+        // Mensaje
+        const alerta = document.createElement('p');
+        alerta.textContent = 'El email se envió correctamente';
+        alerta.classList.add('text-center', 'my-10', 'p-2', 'bg-green-500', 'text-white', 'font-bold', 'uppercase')
+
+        formulario.insertBefore(alerta, spinner);
+
+        setTimeout(() => {
+            alerta.remove();
+            resetearFormulario();
+        }, 5000)
+    }, 3000);
+}
+
+function resetearFormulario() {
+    formulario.reset();
+    iniciarApp();
 }
